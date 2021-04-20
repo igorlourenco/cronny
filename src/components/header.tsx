@@ -24,6 +24,7 @@ export const Header = () => {
       <Heading>Cronny</Heading>
       <Menu>
         <MenuButton
+          rounded="full"
           as={IconButton}
           backgroundColor="transparent"
           icon={<Box size={24} as={AiOutlineMenu} />}

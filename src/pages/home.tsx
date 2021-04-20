@@ -1,16 +1,12 @@
-import { Link } from '@chakra-ui/react'
-import React from 'react'
-import { useAuth } from '../contexts/auth'
 import { Header } from '../components/header'
+import { Protected } from '../components/protected'
 
-function App() {
-  const { user } = useAuth()
-  return user ? (
-    <>
+const Home = () => {
+  return (
+    <Protected>
       <Header />
-    </>
-  ) : (
-    <Link href="/">inicio</Link>
+    </Protected>
   )
 }
-export default App
+
+export default Home
