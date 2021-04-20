@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "awsnexttemplatee182525a": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
