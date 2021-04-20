@@ -76,7 +76,7 @@ function App() {
                   bg: colorMode === 'dark' ? 'purple.700' : 'purple.800',
                 }}
               >
-                Comece a usar
+                Comece a usar, é grátis
               </Button>
             )}
           </Stack>

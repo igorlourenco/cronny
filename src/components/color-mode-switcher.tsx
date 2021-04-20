@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  Box,
-  IconButton,
-  IconButtonProps,
-  useColorMode,
-} from '@chakra-ui/react'
+import { Box, MenuItem, useColorMode } from '@chakra-ui/react'
 import { FiMoon, FiSun } from 'react-icons/fi'
 
 const Moon = () => {
@@ -19,11 +14,13 @@ const ColorModeSwitcher = () => {
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
-    <IconButton
+    <MenuItem
       aria-label={'Color Mode'}
       onClick={toggleColorMode}
       icon={colorMode === 'light' ? <Moon /> : <Sun />}
-    />
+    >
+      Mudar tema
+    </MenuItem>
   )
 }
 

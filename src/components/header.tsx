@@ -5,39 +5,39 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuIcon,
-  MenuCommand,
-  MenuDivider,
   IconButton,
   Box,
+  useColorMode,
 } from '@chakra-ui/react'
-import { AiOutlineMenu } from 'react-icons/ai'
+import { AiOutlineMenu, AiOutlineUser } from 'react-icons/ai'
+import { FiLogOut } from 'react-icons/fi'
+import { GoGraph } from 'react-icons/go'
+import { useAuth } from '../contexts/auth'
 import ColorModeSwitcher from './color-mode-switcher'
 
 export const Header = () => {
+  const { signOut } = useAuth()
+  const { colorMode } = useColorMode()
+
   return (
-    <Flex
-      paddingX={4}
-      paddingY={6}
-      alignItems="center"
-      justifyContent="space-between"
-    >
+    <Flex padding={4} alignItems="center" justifyContent="space-between">
       <Heading>Cronny</Heading>
       <Menu>
         <MenuButton
           as={IconButton}
+          backgroundColor="transparent"
           icon={<Box size={24} as={AiOutlineMenu} />}
         />
         <MenuList>
-          <MenuItem>Download</MenuItem>
-          <MenuItem>Create a Copy</MenuItem>
-          <MenuItem>Mark as Draft</MenuItem>
-          <MenuItem>Delete</MenuItem>
-          <MenuItem>
-            <ColorModeSwitcher />
+          <MenuItem icon={<AiOutlineUser />}>Seu perfil</MenuItem>
+          <MenuItem icon={<GoGraph />}>Estatísticas</MenuItem>
+          <ColorModeSwitcher />
+          <MenuItem
+            color={colorMode === 'dark' ? 'red.200' : 'red.600'}
+            onClick={signOut}
+            icon={<FiLogOut />}
+          >
+            Sair
           </MenuItem>
         </MenuList>
       </Menu>
