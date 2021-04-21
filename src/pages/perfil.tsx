@@ -6,9 +6,7 @@ import {
   Text,
   Stack,
   Button,
-  Link,
   Badge,
-  useColorModeValue,
   Spinner,
   Flex,
 } from '@chakra-ui/react'
@@ -46,17 +44,13 @@ const Profile = () => {
                 justifyContent="space-between"
                 gridColumnGap={2}
               >
-                <Avatar
-                  size={'lg'}
-                  src={user.attributes.picture}
-                  alt={user.attributes.name}
-                />
+                <Avatar size={'lg'} src={user.photoUrl} alt={user.name} />
                 <Stack alignItems="flex-start">
                   <Heading fontSize={'2xl'} fontFamily={'body'}>
-                    {user.attributes.name}
+                    {user.name}
                   </Heading>
                   <Text fontWeight={600} color={'gray.500'} mb={4}>
-                    {user.attributes.email}
+                    {user.email}
                   </Text>
                 </Stack>
               </Flex>

@@ -13,7 +13,7 @@ import { useRouter } from 'next/router'
 
 export const Main = () => {
   const router = useRouter()
-  const { user, signIn } = useAuth()
+  const { user, signInWithGoogle } = useAuth()
   const { colorMode } = useColorMode()
   const purple = colorMode === 'dark' ? 'purple.400' : 'purple.600'
   const gray = colorMode === 'dark' ? 'gray.300' : 'gray.500'
@@ -68,7 +68,7 @@ export const Main = () => {
               </Button>
             ) : (
               <Button
-                onClick={signIn}
+                onClick={signInWithGoogle}
                 rounded={'full'}
                 bg={colorMode === 'dark' ? 'purple.600' : 'purple.700'}
                 color={colorMode === 'dark' ? 'gray.100' : 'white'}

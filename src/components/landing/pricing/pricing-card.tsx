@@ -32,13 +32,13 @@ export const PricingCard = ({
   buttonTitle,
 }: PricingCardProps) => {
   const router = useRouter()
-  const { user, signIn } = useAuth()
+  const { user, signInWithGoogle } = useAuth()
 
   const handleFreePlan = () => {
     if (user) {
       router.push('/home')
     } else {
-      signIn()
+      signInWithGoogle()
     }
   }
 

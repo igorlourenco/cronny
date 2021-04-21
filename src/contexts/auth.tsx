@@ -1,52 +1,81 @@
-import React from 'react'
-import { Auth } from 'aws-amplify'
-import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth/lib/types'
-import config from '../aws-exports'
+import React, { useState, useEffect, useContext, createContext } from 'react'
+import firebase from '../config/firebase'
+import { createUser } from '../database/client'
+import { useRouter } from 'next/router'
 
-export const AuthContext = React.createContext(null)
+const authContext = createContext({
+  user: null,
+  signInWithGoogle: null,
+  signOut: null,
+})
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = React.useState(null)
-
-  React.useEffect(() => {
-    Auth.configure(config)
-
-    Auth.currentAuthenticatedUser()
-      .then((user) => setUser(user))
-      .catch(() => setUser(null))
-  }, [])
-
-  const signIn = () =>
-    Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google })
-      .then((cognitoUser) => {
-        setUser(cognitoUser)
-        return cognitoUser
-      })
-      .catch((err) => {
-        if (err.code === 'UserNotFoundException') {
-          err.message = 'Invalid username or password'
-        }
-        throw err
-      })
-
-  const signOut = () =>
-    Auth.signOut().then((data) => {
-      setUser(null)
-      return data
-    })
-
-  const values = React.useMemo(() => ({ user, signIn, signOut }), [user])
-
-  return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
+export function AuthProvider({ children }) {
+  const auth = useProvideAuth()
+  return <authContext.Provider value={auth}>{children}</authContext.Provider>
 }
 
 export const useAuth = () => {
-  const context = React.useContext(AuthContext)
+  return useContext(authContext)
+}
 
-  if (context === undefined) {
-    throw new Error(
-      '`useUser` hook must be used within a `UserProvider` component',
-    )
+function useProvideAuth() {
+  const router = useRouter()
+  const [user, setUser] = useState({})
+
+  const handleUser = async (rawUser: firebase.User) => {
+    if (rawUser) {
+      const tempUser = await formatUser(rawUser)
+
+      const { token, ...userWithoutToken } = tempUser
+
+      setUser(tempUser)
+      await createUser(tempUser.uid, userWithoutToken)
+
+      return tempUser
+    } else {
+      setUser(false)
+      return false
+    }
   }
-  return context
+
+  const signInWithGoogle = () => {
+    return firebase
+      .auth()
+      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      .then(async (response) => {
+        await handleUser(response.user)
+      })
+  }
+
+  const signOut = async () => {
+    router.push('/')
+    return firebase
+      .auth()
+      .signOut()
+      .then(async () => {
+        await handleUser(null)
+      })
+  }
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onIdTokenChanged(handleUser)
+
+    return () => unsubscribe()
+  }, [])
+
+  return {
+    user,
+    signInWithGoogle,
+    signOut,
+  }
+}
+
+const formatUser = async (user: any) => {
+  return {
+    uid: user?.uid,
+    email: user?.email,
+    name: user?.displayName,
+    token: user.ya,
+    photoUrl: user.photoURL,
+  }
 }
