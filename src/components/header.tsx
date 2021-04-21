@@ -9,15 +9,22 @@ import {
   Box,
   useColorMode,
 } from '@chakra-ui/react'
-import { AiOutlineMenu, AiOutlineUser } from 'react-icons/ai'
+import { useAuth } from '../contexts/auth'
+import { useRouter } from 'next/router'
+import { AiOutlineUser, AiOutlineHome } from 'react-icons/ai'
 import { FiLogOut } from 'react-icons/fi'
 import { GoGraph } from 'react-icons/go'
-import { useAuth } from '../contexts/auth'
+import { CgMenu } from 'react-icons/cg'
 import ColorModeSwitcher from './color-mode-switcher'
 
 export const Header = () => {
+  const router = useRouter()
   const { signOut } = useAuth()
   const { colorMode } = useColorMode()
+
+  const redirectTo = (page: string) => {
+    router.push(page)
+  }
 
   return (
     <Flex padding={4} alignItems="center" justifyContent="space-between">
@@ -25,12 +32,24 @@ export const Header = () => {
       <Menu>
         <MenuButton
           rounded="full"
+          colorScheme="purple"
+          variant="ghost"
           as={IconButton}
-          backgroundColor="transparent"
-          icon={<Box size={24} as={AiOutlineMenu} />}
+          icon={<Box size={24} as={CgMenu} />}
         />
         <MenuList>
-          <MenuItem icon={<AiOutlineUser />}>Seu perfil</MenuItem>
+          <MenuItem
+            icon={<AiOutlineHome />}
+            onClick={() => redirectTo('/home')}
+          >
+            Início
+          </MenuItem>
+          <MenuItem
+            icon={<AiOutlineUser />}
+            onClick={() => redirectTo('/perfil')}
+          >
+            Seu perfil
+          </MenuItem>
           <MenuItem icon={<GoGraph />}>Estatísticas</MenuItem>
           <ColorModeSwitcher />
           <MenuItem
