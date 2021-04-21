@@ -19,7 +19,7 @@ const ColorModeSwitcher = () => {
       onClick={toggleColorMode}
       icon={colorMode === 'light' ? <Moon /> : <Sun />}
     >
-      Mudar tema
+      {colorMode === 'light' ? 'Usar tema escuro' : 'Usar tema claro'}
     </MenuItem>
   )
 }

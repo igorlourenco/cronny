@@ -10,7 +10,10 @@ import {
   Badge,
   useColorModeValue,
   Spinner,
+  Flex,
 } from '@chakra-ui/react'
+import React from 'react'
+import { Feedback } from '../components/feedback'
 import { Header } from '../components/header'
 import { Protected } from '../components/protected'
 import { useAuth } from '../contexts/auth'
@@ -24,97 +27,101 @@ const Profile = () => {
       <Header />
       {user ? (
         <Center py={6}>
-          <Box
-            maxW={'320px'}
+          <Flex
+            direction={['column', 'column', 'column', 'row']}
+            justifyContent="space-between"
+            maxW={['95vw', '75vw', '60vw', '65vw']}
             w={'full'}
-            boxShadow={'2xl'}
-            rounded={'lg'}
-            p={6}
-            textAlign={'center'}
+            gridGap={8}
           >
-            <Avatar
-              size={'xl'}
-              src={user.attributes.picture}
-              alt={'Avatar Alt'}
-              mb={4}
-              pos={'relative'}
-            />
-            <Heading fontSize={'2xl'} fontFamily={'body'}>
-              {user.attributes.name}
-            </Heading>
-            <Text fontWeight={600} color={'gray.500'} mb={4}>
-              {user.attributes.email}
-            </Text>
-            <Text
+            <Box
+              boxShadow={'lg'}
+              rounded={'2xl'}
+              p={6}
               textAlign={'center'}
-              color={useColorModeValue('gray.700', 'gray.400')}
-              px={3}
+              minWidth="43%"
             >
-              Actress, musician, songwriter and artist. PM for work inquires or{' '}
-              <Link href={'#'} color={'blue.400'}>
-                #tag
-              </Link>{' '}
-              me in your posts
-            </Text>
+              <Flex
+                alignItems="center"
+                justifyContent="space-between"
+                gridColumnGap={2}
+              >
+                <Avatar
+                  size={'lg'}
+                  src={user.attributes.picture}
+                  alt={user.attributes.name}
+                />
+                <Stack alignItems="flex-start">
+                  <Heading fontSize={'2xl'} fontFamily={'body'}>
+                    {user.attributes.name}
+                  </Heading>
+                  <Text fontWeight={600} color={'gray.500'} mb={4}>
+                    {user.attributes.email}
+                  </Text>
+                </Stack>
+              </Flex>
 
-            <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
-              <Badge
-                px={2}
-                py={1}
-                bg={useColorModeValue('gray.50', 'gray.800')}
-                fontWeight={'400'}
+              <Stack
+                align={'center'}
+                justify={'center'}
+                direction={'row'}
+                mt={6}
               >
-                #art
-              </Badge>
-              <Badge
-                px={2}
-                py={1}
-                bg={useColorModeValue('gray.50', 'gray.800')}
-                fontWeight={'400'}
-              >
-                #photography
-              </Badge>
-              <Badge
-                px={2}
-                py={1}
-                bg={useColorModeValue('gray.50', 'gray.800')}
-                fontWeight={'400'}
-              >
-                #music
-              </Badge>
-            </Stack>
+                <Badge
+                  px={2}
+                  py={1}
+                  rounded="full"
+                  colorScheme="purple"
+                  fontWeight={'600'}
+                >
+                  Plano Time
+                </Badge>
+                <Badge
+                  px={2}
+                  py={1}
+                  rounded="full"
+                  colorScheme="purple"
+                  fontWeight={'600'}
+                >
+                  3 projetos
+                </Badge>
+                <Badge
+                  px={2}
+                  py={1}
+                  rounded="full"
+                  colorScheme="purple"
+                  fontWeight={'600'}
+                >
+                  53 posts
+                </Badge>
+              </Stack>
 
-            <Stack mt={8} direction={'row'} spacing={4}>
-              <Button
-                flex={1}
-                fontSize={'sm'}
-                rounded={'full'}
-                _focus={{
-                  bg: 'gray.200',
-                }}
-              >
-                Message
-              </Button>
-              <Button
-                flex={1}
-                fontSize={'sm'}
-                rounded={'full'}
-                bg={'blue.400'}
-                color={'white'}
-                boxShadow={
-                  '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-                }
-                _hover={{
-                  bg: 'blue.500',
-                }}
-                _focus={{
-                  bg: 'blue.500',
-                }}
-              >
-                Follow
-              </Button>
-            </Stack>
-          </Box>
+              <Stack mt={8} direction={'row'} spacing={4}>
+                <Button flex={1} size={'sm'} rounded={'full'}>
+                  Encerrar conta
+                </Button>
+                <Button
+                  flex={1}
+                  colorScheme="purple"
+                  variant="solid"
+                  size={'sm'}
+                  rounded={'full'}
+                >
+                  Alterar plano
+                </Button>
+              </Stack>
+            </Box>
+
+            <Box
+              boxShadow={'lg'}
+              rounded={'2xl'}
+              p={6}
+              textAlign={'center'}
+              minWidth="57%"
+            >
+              <Feedback />
+            </Box>
+          </Flex>
         </Center>
       ) : (
         <Spinner />

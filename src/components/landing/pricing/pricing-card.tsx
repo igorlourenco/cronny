@@ -75,8 +75,8 @@ export const PricingCard = ({
       </Box>
       <VStack py={4} borderBottomRadius={'xl'}>
         <List spacing={3} textAlign="start" px={12}>
-          {attributes.map((attribute) => (
-            <ListItem>
+          {attributes.map((attribute, index) => (
+            <ListItem key={index}>
               <ListIcon
                 as={attribute.isActiveToPlan ? IoCheckmarkSharp : IoCloseSharp}
                 size={32}
