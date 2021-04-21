@@ -6,8 +6,8 @@ interface ProtectedProps {
 }
 
 export const Protected = ({ children = null }: ProtectedProps) => {
-  const { user, signIn } = useAuth()
+  const { user, signInWithGoogle } = useAuth()
 
-  if (user === null) return <Button onClick={signIn} />
+  if (user === null) return <Button onClick={signInWithGoogle} />
   return children
 }
