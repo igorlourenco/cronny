@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   FormLabel,
@@ -9,21 +9,39 @@ import {
   RadioGroup,
   Flex,
   Stack,
+  useToast,
 } from '@chakra-ui/react'
 import { CronnyTextarea } from './custom'
+import { useAuth } from '../contexts/auth'
+import { sendFeedback } from '../database/client'
+import { Feedback as IFeedback } from '../interfaces/feedback'
 
 export const Feedback = () => {
-  const messageRef = React.createRef()
-  const [grade, setGrade] = useState(5)
+  const toast = useToast()
+  const messageRef = useRef(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const { user } = useAuth()
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm()
+  const { register, handleSubmit, reset } = useForm()
 
-  function onSubmit(values) {
-    console.log(values)
+  const onSubmit = async (feedback) => {
+    setIsLoading(true)
+    const data: IFeedback = {
+      userId: user.uid,
+      createdAt: new Date().toISOString(),
+      ...feedback,
+    }
+    await sendFeedback(data)
+
+    toast({
+      title: 'Muito obrigado!',
+      description: 'Sua mensagem foi recebida, obrigado pelo feedback.',
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
+    reset()
+    setIsLoading(false)
   }
 
   return (
@@ -78,7 +96,7 @@ export const Feedback = () => {
           width="full"
           rounded="full"
           colorScheme="purple"
-          isLoading={isSubmitting}
+          isLoading={isLoading}
           type="submit"
         >
           Enviar
