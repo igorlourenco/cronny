@@ -1,7 +1,22 @@
 import React, { useState, useEffect, useContext, createContext } from 'react'
 import firebase from '../config/firebase'
-import { createUser } from '../database/client'
 import { useRouter } from 'next/router'
+import { createUser } from '../database/client'
+
+interface AuthProviderProps {
+  children: any
+}
+
+const formatUser = async (user: any) => {
+  const token = await user.getIdToken()
+  return {
+    uid: user?.uid,
+    email: user?.email,
+    name: user?.displayName,
+    photoUrl: user.photoURL,
+    token,
+  }
+}
 
 const authContext = createContext({
   user: null,
@@ -9,31 +24,23 @@ const authContext = createContext({
   signOut: null,
 })
 
-export function AuthProvider({ children }) {
-  const auth = useProvideAuth()
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>
-}
-
-export const useAuth = () => {
-  return useContext(authContext)
-}
-
 function useProvideAuth() {
   const router = useRouter()
   const [user, setUser] = useState({})
 
   const handleUser = async (rawUser: firebase.User) => {
     if (rawUser) {
-      const tempUser = await formatUser(rawUser)
+      const user = await formatUser(rawUser)
 
-      const { token, ...userWithoutToken } = tempUser
+      const { token, ...userWithoutToken } = user
 
-      setUser(tempUser)
-      await createUser(tempUser.uid, userWithoutToken)
+      setUser(user)
+      await createUser(user.uid, userWithoutToken)
 
-      return tempUser
+      return user
     } else {
       setUser(false)
+
       return false
     }
   }
@@ -44,21 +51,22 @@ function useProvideAuth() {
       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(async (response) => {
         await handleUser(response.user)
+        await router.push('/home')
       })
   }
 
   const signOut = async () => {
-    router.push('/')
     return firebase
       .auth()
       .signOut()
       .then(async () => {
         await handleUser(null)
+        await router.push('/')
       })
   }
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onIdTokenChanged(handleUser)
+    const unsubscribe = firebase.auth().onAuthStateChanged(handleUser)
 
     return () => unsubscribe()
   }, [])
@@ -70,12 +78,13 @@ function useProvideAuth() {
   }
 }
 
-const formatUser = async (user: any) => {
-  return {
-    uid: user?.uid,
-    email: user?.email,
-    name: user?.displayName,
-    token: user.ya,
-    photoUrl: user.photoURL,
-  }
+export function AuthProvider(props: AuthProviderProps) {
+  const auth = useProvideAuth()
+  return (
+    <authContext.Provider value={auth}>{props.children}</authContext.Provider>
+  )
+}
+
+export const useAuth = () => {
+  return useContext(authContext)
 }

@@ -11,7 +11,7 @@ import {
   ListIcon,
   Button,
 } from '@chakra-ui/react'
-import { plans } from '../../../data'
+import { plans } from '../../../util/data'
 import { PricingCard } from './pricing-card'
 
 export const Pricing = () => {
