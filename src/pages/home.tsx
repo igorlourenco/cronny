@@ -1,9 +1,8 @@
-import { Header } from '../components/header'
 import { Protected } from '../components/protected'
 import { useAuth } from '../contexts/auth'
 import fetcher from '../util/fetcher'
 import useSWR from 'swr'
-import { Heading } from '@chakra-ui/layout'
+import { Heading } from '@chakra-ui/react'
 import { FirstProjectBanner } from '../components/projects/first-project-banner'
 
 const Home = () => {
@@ -15,12 +14,7 @@ const Home = () => {
     return <Heading>Ocorreu um erro</Heading>
   }
 
-  return (
-    <Protected>
-      <Header />
-      {data && data.projects <= 0 && <FirstProjectBanner />}
-    </Protected>
-  )
+  return <Protected>{data && data.projects <= 0 && <FirstProjectBanner />}</Protected>
 }
 
 export default Home
