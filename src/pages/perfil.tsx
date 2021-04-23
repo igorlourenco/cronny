@@ -17,7 +17,6 @@ import { useAuth } from '../contexts/auth'
 
 const Profile = () => {
   const { user } = useAuth()
-  console.log(user)
 
   return (
     <Protected>

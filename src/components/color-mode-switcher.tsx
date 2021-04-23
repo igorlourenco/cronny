@@ -14,7 +14,12 @@ const ColorModeSwitcher = () => {
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
-    <Button onClick={toggleColorMode} leftIcon={colorMode === 'light' ? <Moon /> : <Sun />}>
+    <Button
+      variant="ghost"
+      rounded="full"
+      onClick={toggleColorMode}
+      leftIcon={colorMode === 'light' ? <Moon /> : <Sun />}
+    >
       {colorMode === 'light' ? 'Usar tema escuro' : 'Usar tema claro'}
     </Button>
   )

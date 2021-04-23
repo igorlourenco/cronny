@@ -29,6 +29,7 @@ const SidebarContent = () => {
   const router = useRouter()
   const { signOut } = useAuth()
   const { colorMode } = useColorMode()
+  const { pathname } = router
 
   const redirectTo = (page: string) => {
     router.push(page)
@@ -37,16 +38,37 @@ const SidebarContent = () => {
   return (
     <Stack>
       <Heading>Cronny</Heading>
-      <Button leftIcon={<AiOutlineHome />} onClick={() => redirectTo('/home')}>
+      <Button
+        rounded="full"
+        colorScheme={pathname === '/home' ? 'purple' : 'gray'}
+        variant={pathname === '/home' ? 'solid' : 'ghost'}
+        leftIcon={<AiOutlineHome />}
+        onClick={() => redirectTo('/home')}
+      >
         Início
       </Button>
-      <Button leftIcon={<AiOutlineUser />} onClick={() => redirectTo('/perfil')}>
+      <Button
+        rounded="full"
+        colorScheme={pathname === '/perfil' ? 'purple' : 'gray'}
+        variant={pathname === '/perfil' ? 'solid' : 'ghost'}
+        leftIcon={<AiOutlineUser />}
+        onClick={() => redirectTo('/perfil')}
+      >
         Seu perfil
       </Button>
-      <Button leftIcon={<GoGraph />}>Estatísticas</Button>
+      <Button
+        rounded="full"
+        colorScheme={pathname === '/estatisticas' ? 'purple' : 'gray'}
+        variant={pathname === '/estatisticas' ? 'solid' : 'ghost'}
+        leftIcon={<GoGraph />}
+      >
+        Estatísticas
+      </Button>
       <ColorModeSwitcher />
       <Button
-        color={colorMode === 'dark' ? 'red.200' : 'red.600'}
+        rounded="full"
+        variant="ghost"
+        colorScheme="red"
         onClick={signOut}
         leftIcon={<FiLogOut />}
       >
@@ -58,7 +80,7 @@ const SidebarContent = () => {
 
 export const Sidebar = ({ isOpen, variant, onClose }: SidebarProps) => {
   return variant === 'sidebar' ? (
-    <Box position="fixed" left={0} p={5} w="20vw" top={0} h="100%">
+    <Box position="fixed" left={0} p={3} w="20vw" top={0} h="100%">
       <SidebarContent />
     </Box>
   ) : (
