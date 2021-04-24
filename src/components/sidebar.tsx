@@ -4,20 +4,22 @@ import {
   Drawer,
   DrawerOverlay,
   DrawerCloseButton,
-  DrawerHeader,
   DrawerBody,
   DrawerContent,
-  VStack,
-  useColorMode,
   Stack,
   Heading,
+  List,
+  ListItem,
+  ListIcon,
+  useColorModeValue,
+  useColorMode,
 } from '@chakra-ui/react'
+
 import { useRouter } from 'next/router'
 import { useAuth } from '../contexts/auth'
 import { AiOutlineUser, AiOutlineHome } from 'react-icons/ai'
-import { FiLogOut } from 'react-icons/fi'
 import { GoGraph } from 'react-icons/go'
-import ColorModeSwitcher from './color-mode-switcher'
+import { FiMoon, FiSun } from 'react-icons/fi'
 
 interface SidebarProps {
   onClose: () => void
@@ -27,53 +29,69 @@ interface SidebarProps {
 
 const SidebarContent = () => {
   const router = useRouter()
-  const { signOut } = useAuth()
-  const { colorMode } = useColorMode()
+  const { colorMode, toggleColorMode } = useColorMode()
   const { pathname } = router
 
-  const redirectTo = (page: string) => {
+  const handleClick = (page: string) => {
     router.push(page)
   }
 
+  const menuItems = [
+    {
+      label: 'Início',
+      pathname: '/home',
+      icon: AiOutlineHome,
+    },
+    {
+      label: 'Seu perfil',
+      pathname: '/perfil',
+      icon: AiOutlineUser,
+    },
+    {
+      label: 'Estatísticas',
+      pathname: '/estatisticas',
+      icon: GoGraph,
+    },
+    {
+      label: colorMode === 'light' ? 'Usar tema escuro' : 'Usar tema claro',
+      pathname: 'color-mode',
+      icon: colorMode === 'light' ? FiMoon : FiSun,
+    },
+  ]
+
   return (
-    <Stack>
-      <Heading>Cronny</Heading>
-      <Button
-        rounded="full"
-        colorScheme={pathname === '/home' ? 'purple' : 'gray'}
-        variant={pathname === '/home' ? 'solid' : 'ghost'}
-        leftIcon={<AiOutlineHome />}
-        onClick={() => redirectTo('/home')}
-      >
-        Início
-      </Button>
-      <Button
-        rounded="full"
-        colorScheme={pathname === '/perfil' ? 'purple' : 'gray'}
-        variant={pathname === '/perfil' ? 'solid' : 'ghost'}
-        leftIcon={<AiOutlineUser />}
-        onClick={() => redirectTo('/perfil')}
-      >
-        Seu perfil
-      </Button>
-      <Button
-        rounded="full"
-        colorScheme={pathname === '/estatisticas' ? 'purple' : 'gray'}
-        variant={pathname === '/estatisticas' ? 'solid' : 'ghost'}
-        leftIcon={<GoGraph />}
-      >
-        Estatísticas
-      </Button>
-      <ColorModeSwitcher />
-      <Button
-        rounded="full"
-        variant="ghost"
-        colorScheme="red"
-        onClick={signOut}
-        leftIcon={<FiLogOut />}
-      >
-        Sair
-      </Button>
+    <Stack spacing={10}>
+      <Heading paddingLeft={3}>Cronny</Heading>
+      <List>
+        {menuItems.map((item) => (
+          <ListItem
+            cursor="pointer"
+            key={item.pathname}
+            display="flex"
+            alignItems="center"
+            padding={3}
+            fontSize={20}
+            rounded="2xl"
+            letterSpacing="0.03rem"
+            color={
+              pathname === item.pathname
+                ? useColorModeValue('purple.900', 'gray.50')
+                : useColorModeValue('gray.500', 'gray.400')
+            }
+            fontWeight={pathname === item.pathname ? 700 : 500}
+            onClick={
+              item.pathname === 'color-mode' ? toggleColorMode : () => handleClick(item.pathname)
+            }
+            _hover={{
+              backgroundColor: 'purple.100',
+              color: useColorModeValue('gray.600', 'gray.700'),
+            }}
+          >
+            <ListIcon as={item.icon} marginRight={5} />
+            {item.label}
+          </ListItem>
+        ))}
+      </List>
     </Stack>
   )
 }

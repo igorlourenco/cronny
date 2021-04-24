@@ -11,12 +11,13 @@ import {
   Flex,
 } from '@chakra-ui/react'
 import React from 'react'
+import { FiLogOut } from 'react-icons/fi'
 import { Feedback } from '../components/feedback'
 import { Protected } from '../components/protected'
 import { useAuth } from '../contexts/auth'
 
 const Profile = () => {
-  const { user } = useAuth()
+  const { user, signOut } = useAuth()
 
   return (
     <Protected>
@@ -29,7 +30,14 @@ const Profile = () => {
             w={'full'}
             gridGap={8}
           >
-            <Box boxShadow={'lg'} rounded={'2xl'} p={6} textAlign={'center'} minWidth="43%">
+            <Stack
+              boxShadow={'lg'}
+              justifyContent="space-between"
+              rounded={'2xl'}
+              p={6}
+              textAlign={'center'}
+              minWidth="43%"
+            >
               <Flex alignItems="center" justifyContent="space-between" gridColumnGap={2}>
                 <Avatar size={'lg'} src={user.photoUrl} alt={user.name} />
                 <Stack alignItems="flex-start">
@@ -42,7 +50,7 @@ const Profile = () => {
                 </Stack>
               </Flex>
 
-              <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
+              <Stack align={'center'} gridColumnGap={3} justify={'center'} direction={'row'} mt={6}>
                 <Badge px={2} py={1} rounded="full" colorScheme="purple" fontWeight={'600'}>
                   Plano Time
                 </Badge>
@@ -54,15 +62,22 @@ const Profile = () => {
                 </Badge>
               </Stack>
 
-              <Stack mt={8} direction={'row'} spacing={4}>
-                <Button flex={1} size={'sm'} rounded={'full'}>
-                  Encerrar conta
-                </Button>
-                <Button flex={1} colorScheme="purple" variant="solid" size={'sm'} rounded={'full'}>
+              <Flex alignItems="center" gridColumnGap={3} mt={8} direction={'row'} spacing={4}>
+                <Button flex={1} colorScheme="purple" variant="solid" rounded={'full'}>
                   Alterar plano
                 </Button>
-              </Stack>
-            </Box>
+                <Button
+                  size="sm"
+                  rounded="full"
+                  variant="ghost"
+                  colorScheme="red"
+                  onClick={signOut}
+                  leftIcon={<FiLogOut />}
+                >
+                  Sair
+                </Button>
+              </Flex>
+            </Stack>
 
             <Box boxShadow={'lg'} rounded={'2xl'} p={6} textAlign={'center'} minWidth="57%">
               <Feedback />

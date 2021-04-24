@@ -45,16 +45,9 @@ export const Feedback = () => {
   }
 
   return (
-    <Stack
-      as="form"
-      alignItems="center"
-      onSubmit={handleSubmit(onSubmit)}
-      spacing={5}
-    >
+    <Stack as="form" alignItems="center" onSubmit={handleSubmit(onSubmit)} spacing={5}>
       <FormControl>
-        <FormLabel htmlFor="gradeFeedback">
-          Como está sendo sua experiência?
-        </FormLabel>
+        <FormLabel htmlFor="gradeFeedback">Como está sendo sua experiência?</FormLabel>
         <RadioGroup
           id="gradeFeedback"
           name="gradeFeedback"
@@ -70,12 +63,9 @@ export const Feedback = () => {
               Ruim
             </Radio>
             <Radio value="3" name="grade" {...register('grade')}>
-              Média
-            </Radio>
-            <Radio value="4" name="grade" {...register('grade')}>
               Boa
             </Radio>
-            <Radio value="5" name="grade" {...register('grade')}>
+            <Radio value="4" name="grade" {...register('grade')}>
               Ótima
             </Radio>
           </Flex>
