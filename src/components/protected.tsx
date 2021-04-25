@@ -5,7 +5,7 @@ import { Sidebar } from './sidebar'
 import { Header } from './header'
 
 const smVariant = { navigation: 'drawer', navigationButton: true }
-const mdVariant = { navigation: 'sidebar', navigationButton: false }
+const lgVariant = { navigation: 'sidebar', navigationButton: false }
 
 interface ProtectedProps {
   children: any
@@ -14,7 +14,7 @@ interface ProtectedProps {
 export const Protected = ({ children = null }: ProtectedProps) => {
   const { user, signInWithGoogle } = useAuth()
   const [isSidebarOpen, setSidebarOpen] = useState(false)
-  const variants = useBreakpointValue({ base: smVariant, md: mdVariant })
+  const variants = useBreakpointValue({ base: smVariant, lg: lgVariant })
 
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen)
 
@@ -24,7 +24,7 @@ export const Protected = ({ children = null }: ProtectedProps) => {
       <Sidebar variant={variants?.navigation} isOpen={isSidebarOpen} onClose={toggleSidebar} />
       <Box ml={!variants?.navigationButton && 200}>
         <Header showSidebarButton={variants?.navigationButton} onShowSidebar={toggleSidebar} />
-        {children}
+        <Box padding={[3, 5, 7, 9]}>{children}</Box>
       </Box>
     </>
   )

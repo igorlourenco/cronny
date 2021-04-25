@@ -84,7 +84,7 @@ export const Feedback = () => {
         <Button
           mt={4}
           width="full"
-          rounded="full"
+          rounded="md"
           colorScheme="purple"
           isLoading={isLoading}
           type="submit"

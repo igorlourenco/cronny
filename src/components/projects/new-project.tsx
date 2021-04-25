@@ -60,7 +60,7 @@ export const NewProject = () => {
 
   return (
     <>
-      <Button leftIcon={<AiOutlinePlus />} rounded="full" colorScheme="purple" onClick={onOpen}>
+      <Button leftIcon={<AiOutlinePlus />} rounded="md" colorScheme="purple" onClick={onOpen}>
         Novo projeto
       </Button>
 
@@ -78,7 +78,7 @@ export const NewProject = () => {
             />
           </ModalBody>
           <ModalFooter>
-            <Button rounded="full" isLoading={isLoading} colorScheme="purple" type="submit">
+            <Button rounded="md" isLoading={isLoading} colorScheme="purple" type="submit">
               Criar projeto
             </Button>
           </ModalFooter>

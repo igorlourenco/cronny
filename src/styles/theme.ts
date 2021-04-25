@@ -20,17 +20,19 @@ const fontWeights = {
   bold: 700,
 }
 
+const global = (props) => ({
+  body: {
+    fontFamily: 'body',
+    color: props.colorMode === 'dark' ? 'white' : 'gray.600',
+    lineHeight: 'base',
+  },
+})
+
 const theme = extendTheme({
   config,
   fonts,
   fontWeights,
-  styles: {
-    global: {
-      body: {
-        letterSpacing: '0.05rem',
-      },
-    },
-  },
+  styles: { global },
 })
 
 export default theme

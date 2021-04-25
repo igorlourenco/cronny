@@ -24,13 +24,7 @@ interface PricingCardProps {
   buttonTitle: string
 }
 
-export const PricingCard = ({
-  order,
-  title,
-  price,
-  attributes,
-  buttonTitle,
-}: PricingCardProps) => {
+export const PricingCard = ({ order, title, price, attributes, buttonTitle }: PricingCardProps) => {
   const router = useRouter()
   const { user, signInWithGoogle } = useAuth()
 
@@ -43,12 +37,7 @@ export const PricingCard = ({
   }
 
   return (
-    <Box
-      mb={4}
-      shadow="base"
-      alignSelf={{ base: 'center', lg: 'flex-start' }}
-      borderRadius="2xl"
-    >
+    <Box mb={4} shadow="md" alignSelf={{ base: 'center', lg: 'flex-start' }} borderRadius="md">
       <Box py={4} px={12}>
         <Text fontWeight="500" fontSize="2xl">
           {title}
@@ -73,7 +62,7 @@ export const PricingCard = ({
           )}
         </HStack>
       </Box>
-      <VStack py={4} borderBottomRadius={'xl'}>
+      <VStack py={4} borderBottomRadius="xl">
         <List spacing={3} textAlign="start" px={12}>
           {attributes.map((attribute, index) => (
             <ListItem key={index}>
@@ -90,7 +79,7 @@ export const PricingCard = ({
           {order === 'first' ? (
             <Button
               w="full"
-              rounded="full"
+              rounded="md"
               colorScheme="purple"
               variant="outline"
               onClick={handleFreePlan}
@@ -98,12 +87,7 @@ export const PricingCard = ({
               {buttonTitle}
             </Button>
           ) : (
-            <Button
-              w="full"
-              rounded="full"
-              colorScheme="purple"
-              variant="solid"
-            >
+            <Button w="full" rounded="md" colorScheme="purple" variant="solid">
               {buttonTitle}
             </Button>
           )}

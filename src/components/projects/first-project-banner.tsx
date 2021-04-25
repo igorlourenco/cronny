@@ -16,7 +16,7 @@ export const FirstProjectBanner = () => {
       <Stack
         spacing={8}
         boxShadow="lg"
-        borderRadius="2xl"
+        borderRadius="md"
         padding={8}
         alignItems="center"
         justifyContent="center"
@@ -24,7 +24,7 @@ export const FirstProjectBanner = () => {
       >
         <Stack>
           <Heading textAlign="center">
-            Bem-vindo, {user.name.split(' ')[0]}! Vamos começar? 🥳
+            Que bom ter você aqui, {user.name && user.name.split(' ')[0]}!🥳
           </Heading>
           <Text textAlign="center">Para começar na Cronny, basta criar seu primeiro projeto</Text>
         </Stack>

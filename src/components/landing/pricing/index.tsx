@@ -21,7 +21,7 @@ export const Pricing = () => {
         <Heading as="h1" fontSize="4xl">
           Use o plano que combina com você
         </Heading>
-        <Text fontSize="lg" color={'gray.500'}>
+        <Text fontSize="lg" color="gray.500">
           Faça um teste de 7 dias. Cancele a qualquer hora.
         </Text>
       </VStack>

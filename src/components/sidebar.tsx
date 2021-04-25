@@ -16,8 +16,7 @@ import {
 } from '@chakra-ui/react'
 
 import { useRouter } from 'next/router'
-import { useAuth } from '../contexts/auth'
-import { AiOutlineUser, AiOutlineHome } from 'react-icons/ai'
+import { AiOutlineUser, AiOutlineHome, AiOutlineFolder } from 'react-icons/ai'
 import { GoGraph } from 'react-icons/go'
 import { FiMoon, FiSun } from 'react-icons/fi'
 
@@ -53,7 +52,7 @@ const SidebarContent = () => {
       icon: GoGraph,
     },
     {
-      label: colorMode === 'light' ? 'Usar tema escuro' : 'Usar tema claro',
+      label: colorMode === 'light' ? 'Tema escuro' : 'Tema claro',
       pathname: 'color-mode',
       icon: colorMode === 'light' ? FiMoon : FiSun,
     },
@@ -61,7 +60,9 @@ const SidebarContent = () => {
 
   return (
     <Stack spacing={10}>
-      <Heading paddingLeft={3}>Cronny</Heading>
+      <Heading paddingLeft={3} fontFamily="Paprika">
+        Cronny
+      </Heading>
       <List>
         {menuItems.map((item) => (
           <ListItem
@@ -70,8 +71,8 @@ const SidebarContent = () => {
             display="flex"
             alignItems="center"
             padding={3}
-            fontSize={20}
-            rounded="2xl"
+            fontSize={18}
+            rounded="md"
             letterSpacing="0.03rem"
             color={
               pathname === item.pathname
@@ -98,7 +99,7 @@ const SidebarContent = () => {
 
 export const Sidebar = ({ isOpen, variant, onClose }: SidebarProps) => {
   return variant === 'sidebar' ? (
-    <Box position="fixed" left={0} p={3} w="20vw" top={0} h="100%">
+    <Box position="fixed" left={0} p={3} w="auto" top={0} h="100%">
       <SidebarContent />
     </Box>
   ) : (

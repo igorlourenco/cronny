@@ -26,49 +26,49 @@ const Profile = () => {
           <Flex
             direction={['column', 'column', 'column', 'row']}
             justifyContent="space-between"
-            maxW={['95vw', '75vw', '60vw', '65vw']}
-            w={'full'}
+            w="full"
             gridGap={8}
           >
             <Stack
-              boxShadow={'lg'}
+              boxShadow="lg"
+              spacing={5}
               justifyContent="space-between"
-              rounded={'2xl'}
+              rounded="md"
               p={6}
-              textAlign={'center'}
-              minWidth="43%"
+              textAlign="center"
+              minWidth="40%"
             >
               <Flex alignItems="center" justifyContent="space-between" gridColumnGap={2}>
-                <Avatar size={'lg'} src={user.photoUrl} alt={user.name} />
+                <Avatar size="lg" src={user.photoUrl} alt={user.name} />
                 <Stack alignItems="flex-start">
-                  <Heading fontSize={'2xl'} fontFamily={'body'}>
+                  <Heading fontSize="2xl" fontFamily="body">
                     {user.name}
                   </Heading>
-                  <Text fontWeight={600} color={'gray.500'} mb={4}>
+                  <Text fontWeight={600} color="gray.500" mb={4}>
                     {user.email}
                   </Text>
                 </Stack>
               </Flex>
 
-              <Stack align={'center'} gridColumnGap={3} justify={'center'} direction={'row'} mt={6}>
-                <Badge px={2} py={1} rounded="full" colorScheme="purple" fontWeight={'600'}>
+              <Stack align="center" gridColumnGap={3} justify="center" direction="row" mt={6}>
+                <Badge px={2} py={1} rounded="md" colorScheme="purple" fontWeight="600">
                   Plano Time
                 </Badge>
-                <Badge px={2} py={1} rounded="full" colorScheme="purple" fontWeight={'600'}>
+                <Badge px={2} py={1} rounded="md" colorScheme="purple" fontWeight="600">
                   3 projetos
                 </Badge>
-                <Badge px={2} py={1} rounded="full" colorScheme="purple" fontWeight={'600'}>
+                <Badge px={2} py={1} rounded="md" colorScheme="purple" fontWeight="600">
                   53 posts
                 </Badge>
               </Stack>
 
-              <Flex alignItems="center" gridColumnGap={3} mt={8} direction={'row'} spacing={4}>
-                <Button flex={1} colorScheme="purple" variant="solid" rounded={'full'}>
+              <Flex alignItems="center" gridColumnGap={3} mt={8} direction="row" spacing={4}>
+                <Button flex={1} colorScheme="purple" variant="solid" rounded="md">
                   Alterar plano
                 </Button>
                 <Button
                   size="sm"
-                  rounded="full"
+                  rounded="md"
                   variant="ghost"
                   colorScheme="red"
                   onClick={signOut}
@@ -79,7 +79,7 @@ const Profile = () => {
               </Flex>
             </Stack>
 
-            <Box boxShadow={'lg'} rounded={'2xl'} p={6} textAlign={'center'} minWidth="57%">
+            <Box boxShadow="lg" flex="1" rounded="md" p={6} textAlign="center" minWidth="50%">
               <Feedback />
             </Box>
           </Flex>
