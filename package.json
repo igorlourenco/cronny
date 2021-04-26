@@ -12,6 +12,7 @@
     "@chakra-ui/react": "^1.5.2",
     "@emotion/react": "11",
     "@emotion/styled": "11",
+    "chakra-ui-autocomplete": "^1.3.0",
     "firebase": "^8.4.1",
     "firebase-admin": "^9.6.0",
     "framer-motion": "4",

@@ -19,3 +19,19 @@ export async function getUserProjects(uid: string) {
     return { error }
   }
 }
+
+export async function getUserCategories(uid: string) {
+  try {
+    const snapshot = await firestore.collection('categories').where('userId', '==', uid).get()
+
+    const categories = []
+
+    snapshot.forEach((doc) => {
+      categories.push({ id: doc.id, ...doc.data() })
+    })
+
+    return { categories }
+  } catch (error) {
+    return { error }
+  }
+}

@@ -1,16 +1,4 @@
-import {
-  Box,
-  Stack,
-  HStack,
-  Heading,
-  Text,
-  VStack,
-  useColorModeValue,
-  List,
-  ListItem,
-  ListIcon,
-  Button,
-} from '@chakra-ui/react'
+import { Box, Stack, Heading, Text, VStack } from '@chakra-ui/react'
 import { plans } from '../../../util/data'
 import { PricingCard } from './pricing-card'
 

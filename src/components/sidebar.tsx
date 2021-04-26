@@ -11,8 +11,6 @@ import {
   List,
   ListItem,
   ListIcon,
-  useColorModeValue,
-  useColorMode,
 } from '@chakra-ui/react'
 
 import { useRouter } from 'next/router'
@@ -28,7 +26,6 @@ interface SidebarProps {
 
 const SidebarContent = () => {
   const router = useRouter()
-  const { colorMode, toggleColorMode } = useColorMode()
   const { pathname } = router
 
   const handleClick = (page: string) => {
@@ -51,11 +48,6 @@ const SidebarContent = () => {
       pathname: '/estatisticas',
       icon: GoGraph,
     },
-    {
-      label: colorMode === 'light' ? 'Tema escuro' : 'Tema claro',
-      pathname: 'color-mode',
-      icon: colorMode === 'light' ? FiMoon : FiSun,
-    },
   ]
 
   return (
@@ -74,18 +66,12 @@ const SidebarContent = () => {
             fontSize={18}
             rounded="md"
             letterSpacing="0.03rem"
-            color={
-              pathname === item.pathname
-                ? useColorModeValue('purple.900', 'gray.50')
-                : useColorModeValue('gray.500', 'gray.400')
-            }
+            color={pathname === item.pathname ? 'purple.900' : 'gray.500'}
             fontWeight={pathname === item.pathname ? 700 : 500}
-            onClick={
-              item.pathname === 'color-mode' ? toggleColorMode : () => handleClick(item.pathname)
-            }
+            onClick={() => handleClick(item.pathname)}
             _hover={{
               backgroundColor: 'purple.100',
-              color: useColorModeValue('gray.600', 'gray.700'),
+              color: 'gray.600',
             }}
           >
             <ListIcon as={item.icon} marginRight={5} />

@@ -1,14 +1,4 @@
-import {
-  Box,
-  Text,
-  Button,
-  VStack,
-  HStack,
-  List,
-  ListItem,
-  ListIcon,
-  useColorModeValue,
-} from '@chakra-ui/react'
+import { Box, Text, Button, VStack, HStack, List, ListItem, ListIcon } from '@chakra-ui/react'
 import { IoCheckmarkSharp, IoCloseSharp } from 'react-icons/io5'
 import { useAuth } from '../../../contexts/auth'
 import { useRouter } from 'next/router'

@@ -1,22 +1,10 @@
 import { useAuth } from '../../contexts/auth'
-import {
-  Button,
-  Flex,
-  Heading,
-  Image,
-  Stack,
-  Text,
-  useBreakpointValue,
-  useColorMode,
-} from '@chakra-ui/react'
+import { Button, Flex, Heading, Image, Stack, Text, useBreakpointValue } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 
 export const Main = () => {
   const router = useRouter()
   const { user, signInWithGoogle } = useAuth()
-  const { colorMode } = useColorMode()
-  const purple = colorMode === 'dark' ? 'purple.400' : 'purple.600'
-  const gray = colorMode === 'dark' ? 'gray.300' : 'gray.500'
 
   const redirectToHome = () => {
     router.push('/home')
@@ -37,18 +25,18 @@ export const Main = () => {
                 position: 'absolute',
                 bottom: 1,
                 left: 0,
-                bg: colorMode === 'dark' ? 'purple.500' : 'purple.300',
+                bg: 'purple.300',
                 zIndex: -1,
               }}
             >
               Cronny
             </Text>
             <br />{' '}
-            <Text color={purple} as="span">
+            <Text color="gray.700" as="span">
               Design Projects
             </Text>{' '}
           </Heading>
-          <Text fontSize={{ base: 'md', lg: 'lg' }} color={gray}>
+          <Text fontSize={{ base: 'md', lg: 'lg' }} color="purple.600">
             The project board is an exclusive resource for contract work. It's perfect for
             freelancers, agencies, and moonlighters.
           </Text>
@@ -58,10 +46,10 @@ export const Main = () => {
               <Button
                 onClick={redirectToHome}
                 rounded="md"
-                bg={colorMode === 'dark' ? 'purple.600' : 'purple.700'}
-                color={colorMode === 'dark' ? 'gray.100' : 'white'}
+                bg="purple.700"
+                color="white"
                 _hover={{
-                  bg: colorMode === 'dark' ? 'purple.700' : 'purple.800',
+                  bg: 'purple.800',
                 }}
               >
                 Ir para Home
@@ -70,10 +58,10 @@ export const Main = () => {
               <Button
                 onClick={signInWithGoogle}
                 rounded="md"
-                bg={colorMode === 'dark' ? 'purple.600' : 'purple.700'}
-                color={colorMode === 'dark' ? 'gray.100' : 'white'}
+                bg="purple.700"
+                color="white"
                 _hover={{
-                  bg: colorMode === 'dark' ? 'purple.700' : 'purple.800',
+                  bg: 'purple.800',
                 }}
               >
                 Comece a usar, é grátis
