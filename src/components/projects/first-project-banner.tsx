@@ -22,7 +22,7 @@ export const FirstProjectBanner = () => {
         <Text textAlign="center">Para começar na Cronny, basta criar seu primeiro projeto</Text>
       </Stack>
 
-      <NewProject />
+      <NewProject isFirstProject />
     </Stack>
   )
 }

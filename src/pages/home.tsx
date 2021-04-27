@@ -4,6 +4,7 @@ import fetcher from '../util/fetcher'
 import useSWR from 'swr'
 import { Heading, Stack, Spinner, Button, Box } from '@chakra-ui/react'
 import { FirstProjectBanner } from '../components/projects/first-project-banner'
+import { ProjectsBoard } from '../components/projects/projects-board'
 
 const Home = () => {
   const { user } = useAuth()
@@ -20,9 +21,7 @@ const Home = () => {
     <Protected>
       <Box display="flex" width="full" spacing={8} alignItems="center" justifyContent="center">
         {data && data.projects ? (
-          <Stack boxShadow="lg" width={['95%', '85%', '75%', '65%']}>
-            <Button>TES</Button>
-          </Stack>
+          <ProjectsBoard projects={data.projects} />
         ) : (
           <FirstProjectBanner />
         )}

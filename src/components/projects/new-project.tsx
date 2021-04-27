@@ -13,6 +13,7 @@ import {
   ModalCloseButton,
   useDisclosure,
   useToast,
+  IconButton,
 } from '@chakra-ui/react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { useForm } from 'react-hook-form'
@@ -22,7 +23,7 @@ import { CronnyInput } from '../custom'
 import { useAuth } from '../../contexts/auth'
 import { mutate } from 'swr'
 
-export const NewProject = () => {
+export const NewProject = ({ isFirstProject = false }: { isFirstProject?: boolean }) => {
   const nameRef = useRef(null)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [isLoading, setIsLoading] = useState(false)
@@ -65,14 +66,24 @@ export const NewProject = () => {
 
   return (
     <>
-      <Button
-        leftIcon={<AiOutlinePlus />}
-        colorScheme="purple"
-        _hover={{ boxShadow: 'md' }}
-        onClick={onOpen}
-      >
-        Novo projeto
-      </Button>
+      {isFirstProject ? (
+        <Button
+          leftIcon={<AiOutlinePlus />}
+          colorScheme="purple"
+          _hover={{ boxShadow: 'md' }}
+          onClick={onOpen}
+        >
+          Meu primeiro projeto
+        </Button>
+      ) : (
+        <IconButton
+          aria-label="Novo projeto"
+          icon={<AiOutlinePlus />}
+          colorScheme="purple"
+          _hover={{ boxShadow: 'md' }}
+          onClick={onOpen}
+        />
+      )}
 
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />

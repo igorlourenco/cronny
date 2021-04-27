@@ -12,7 +12,7 @@ export const Protected = ({ children = null }: ProtectedProps) => {
   if (user === null) return <Button onClick={signInWithGoogle} />
   return (
     <>
-      <Header data={null} />
+      <Header />
       <Box padding={[3, 5, 7, 9]}>{children}</Box>
     </>
   )

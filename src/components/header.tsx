@@ -1,10 +1,6 @@
 import { Flex, Image } from '@chakra-ui/react'
 
-interface HeaderProps {
-  data: any
-}
-
-export const Header = ({ data }: HeaderProps) => {
+export const Header = () => {
   return (
     <Flex
       padding={[3, 3, 4, 4]}
