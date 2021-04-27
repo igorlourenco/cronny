@@ -1,14 +1,13 @@
-import { Flex, Button } from '@chakra-ui/react'
+import { Flex, Image } from '@chakra-ui/react'
 
 interface HeaderProps {
-  onShowSidebar: () => void
-  showSidebarButton?: boolean
+  data: any
 }
 
-export const Header = ({ showSidebarButton = true, onShowSidebar }: HeaderProps) => {
+export const Header = ({ data }: HeaderProps) => {
   return (
-    <Flex padding={4} alignItems="center" justifyContent="space-between">
-      {showSidebarButton && <Button onClick={onShowSidebar}>aqui</Button>}
+    <Flex padding={[3, 3, 4, 4]} alignItems="center" justifyContent="space-between">
+      <Image src="/images/brand.svg" width={[10, 10, 12, 12]} height="auto" />
     </Flex>
   )
 }

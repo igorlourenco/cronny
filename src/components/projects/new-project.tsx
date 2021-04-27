@@ -7,6 +7,9 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
+  Flex,
+  Text,
+  Switch,
   ModalCloseButton,
   useDisclosure,
   useToast,
@@ -23,6 +26,7 @@ export const NewProject = () => {
   const nameRef = useRef(null)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [isLoading, setIsLoading] = useState(false)
+  const [isPublic, setIsPublic] = useState(false)
   const { register, handleSubmit, reset } = useForm()
   const { user } = useAuth()
   const toast = useToast()
@@ -32,6 +36,7 @@ export const NewProject = () => {
     const newProject: Project = {
       userId: user.uid,
       isActive: true,
+      isPublic,
       createdAt: new Date().toISOString(),
       ...project,
     }
@@ -60,7 +65,12 @@ export const NewProject = () => {
 
   return (
     <>
-      <Button leftIcon={<AiOutlinePlus />} rounded="md" colorScheme="purple" onClick={onOpen}>
+      <Button
+        leftIcon={<AiOutlinePlus />}
+        colorScheme="purple"
+        _hover={{ boxShadow: 'md' }}
+        onClick={onOpen}
+      >
         Novo projeto
       </Button>
 
@@ -76,10 +86,22 @@ export const NewProject = () => {
               name="name"
               {...register('name', { required: true })}
             />
+            <Flex alignItems="center" marginTop={4}>
+              <Text marginRight={2}>Deseja compartilhar o projeto?</Text>
+              <Switch
+                colorScheme="purple"
+                isChecked={isPublic}
+                onChange={() => setIsPublic(!isPublic)}
+                id="public-project"
+              />
+            </Flex>
+            <Text fontSize={10} fontWeight={700} color="gray.500">
+              Qualquer um com o link tem acesso ao projeto. Isso pode ser mudado depois.
+            </Text>
           </ModalBody>
           <ModalFooter>
             <Button rounded="md" isLoading={isLoading} colorScheme="purple" type="submit">
-              Criar projeto
+              Criar
             </Button>
           </ModalFooter>
         </ModalContent>

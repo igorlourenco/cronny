@@ -8,7 +8,7 @@ export const FirstProjectBanner = () => {
     <Box
       display="flex"
       width="full"
-      height="80vh"
+      height="75vh"
       spacing={8}
       alignItems="center"
       justifyContent="center"

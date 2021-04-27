@@ -15,6 +15,7 @@ const fontWeights = {
 const styles = {
   global: {
     'html, body': {
+      backgroundColor: '#fffafa',
       color: 'gray.600',
       lineHeight: 'tall',
       letterSpacing: '0.03rem',

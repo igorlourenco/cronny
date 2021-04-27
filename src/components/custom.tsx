@@ -7,12 +7,11 @@ export const CronnyInput = React.forwardRef((props: InputProps, ref: any) => {
       ref={ref}
       rounded="md"
       border="0"
-      color="gray.900"
       fontWeight={500}
-      backgroundColor="purple.100"
+      backgroundColor="purple.50"
       _focus={{
         borderColor: 'purple.700',
-        backgroundColor: 'purple.200',
+        backgroundColor: 'purple.100',
       }}
       _placeholder={{
         color: 'gray.500',
@@ -29,12 +28,11 @@ export const CronnyTextarea = React.forwardRef((props: TextareaProps, ref: any) 
       ref={ref}
       rounded="md"
       border="0"
-      color="gray.900"
       fontWeight={500}
-      backgroundColor="purple.100"
+      backgroundColor="purple.50"
       _focus={{
         borderColor: 'purple.700',
-        backgroundColor: 'purple.200',
+        backgroundColor: 'purple.100',
       }}
       _placeholder={{
         color: 'gray.500',
