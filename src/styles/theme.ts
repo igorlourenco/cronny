@@ -20,6 +20,25 @@ const styles = {
       lineHeight: 'tall',
       letterSpacing: '0.03rem',
     },
+
+    '::-webkit-scrollbar': {
+      width: '10px',
+    },
+
+    /* Track */
+    '::-webkit-scrollbar-track': {
+      background: '#f1f1f1',
+    },
+
+    /* Handle */
+    '::-webkit-scrollbar-thumb': {
+      background: 'purple.500',
+    },
+
+    /* Handle on hover */
+    '::-webkit-scrollbar-thumb:hover': {
+      background: '#555',
+    },
   },
 }
 

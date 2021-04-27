@@ -2,7 +2,7 @@ import { Protected } from '../components/protected'
 import { useAuth } from '../contexts/auth'
 import fetcher from '../util/fetcher'
 import useSWR from 'swr'
-import { Heading, Stack, Spinner, Button, Box } from '@chakra-ui/react'
+import { Heading, Spinner, Box } from '@chakra-ui/react'
 import { FirstProjectBanner } from '../components/projects/first-project-banner'
 import { ProjectsBoard } from '../components/projects/projects-board'
 
@@ -15,12 +15,12 @@ const Home = () => {
     return <Heading>Ocorreu um erro</Heading>
   }
 
-  if (!data) return <Spinner />
+  if (!data || !data.projects) return <Spinner />
 
   return (
     <Protected>
       <Box display="flex" width="full" spacing={8} alignItems="center" justifyContent="center">
-        {data && data.projects ? (
+        {data && data.projects.length > 0 ? (
           <ProjectsBoard projects={data.projects} />
         ) : (
           <FirstProjectBanner />

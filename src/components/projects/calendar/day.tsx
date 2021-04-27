@@ -1,6 +1,9 @@
-import { Text, Box, Stack, Flex, BoxProps, Heading } from '@chakra-ui/react'
+import { Text, Box, Flex, BoxProps, Heading, IconButton } from '@chakra-ui/react'
 import { isToday, isSameMonth, isPast } from 'date-fns'
 import { formatDate } from '../../../util/helpers'
+import { BiNote } from 'react-icons/bi'
+import { FiSend } from 'react-icons/fi'
+import React from 'react'
 
 interface DayProps extends BoxProps {
   day: Date
@@ -29,7 +32,23 @@ export const Day = ({ day, month, date, project, ...props }: DayProps) => {
         >
           {date}
         </Text>
-        {(!isPast(day) || isToday(day)) && <Heading>a</Heading>}
+        {(!isPast(day) || isToday(day)) && (
+          <Flex>
+            <IconButton
+              aria-label="Criar anotação"
+              icon={<BiNote />}
+              variant="ghost"
+              colorScheme="purple"
+              marginRight={2}
+            />
+            <IconButton
+              aria-label="Postar"
+              icon={<FiSend />}
+              variant="ghost"
+              colorScheme="purple"
+            />
+          </Flex>
+        )}
       </Flex>
     </Box>
   )

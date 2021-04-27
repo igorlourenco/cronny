@@ -85,7 +85,7 @@ export const NewProject = ({ isFirstProject = false }: { isFirstProject?: boolea
         />
       )}
 
-      <Modal onClose={onClose} isOpen={isOpen} isCentered>
+      <Modal onClose={onClose} isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
           <ModalHeader>Novo Projeto</ModalHeader>
