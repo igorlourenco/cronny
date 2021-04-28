@@ -61,6 +61,9 @@ function useProvideAuth() {
     facebookProvider.addScope('public_profile')
     facebookProvider.addScope('instagram_basic')
     facebookProvider.addScope('pages_show_list')
+    facebookProvider.addScope('instagram_graph_user_profile')
+    facebookProvider.addScope('instagram_graph_user_media')
+
     return firebase
       .auth()
       .signInWithPopup(facebookProvider)
