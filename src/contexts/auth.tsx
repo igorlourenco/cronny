@@ -47,14 +47,9 @@ function useProvideAuth() {
   }
 
   const signInWithGoogle = () => {
-    const facebookProvider = new firebase.auth.GoogleAuthProvider()
-    facebookProvider.addScope('public_profile')
-    facebookProvider.addScope('instagram_basic')
-    facebookProvider.addScope('pages_show_list')
-
     return firebase
       .auth()
-      .signInWithPopup(facebookProvider)
+      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(async (response) => {
         await handleUser(response.user)
         await router.push('/home')
@@ -62,9 +57,13 @@ function useProvideAuth() {
   }
 
   const connectToFacebook = () => {
+    const facebookProvider = new firebase.auth.FacebookAuthProvider()
+    facebookProvider.addScope('public_profile')
+    facebookProvider.addScope('instagram_basic')
+    facebookProvider.addScope('pages_show_list')
     return firebase
       .auth()
-      .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+      .signInWithPopup(facebookProvider)
       .then(async (response) => {
         console.log(response)
         await router.push('/home')
