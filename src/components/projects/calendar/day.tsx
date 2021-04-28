@@ -1,8 +1,8 @@
-import { Text, Box, Flex, BoxProps, Heading, IconButton } from '@chakra-ui/react'
+import { Text, Box, Flex, BoxProps, Stack, IconButton, Icon } from '@chakra-ui/react'
 import { isToday, isSameMonth, isPast } from 'date-fns'
 import { formatDate } from '../../../util/helpers'
-import { BiNote } from 'react-icons/bi'
-import { FiSend } from 'react-icons/fi'
+import { AiOutlinePlus } from 'react-icons/ai'
+import { SiTwitter, SiInstagram } from 'react-icons/si'
 import React from 'react'
 
 interface DayProps extends BoxProps {
@@ -32,24 +32,60 @@ export const Day = ({ day, month, date, project, ...props }: DayProps) => {
         >
           {date}
         </Text>
-        {(!isPast(day) || isToday(day)) && (
-          <Flex>
-            <IconButton
-              aria-label="Criar anotação"
-              icon={<BiNote />}
-              variant="ghost"
-              colorScheme="purple"
-              marginRight={2}
-            />
+      </Flex>
+      {(!isPast(day) || isToday(day)) && (
+        <Stack spacing={4}>
+          <Flex
+            alignItems="center"
+            justifyContent="space-between"
+            padding={2}
+            borderColor="twitter.200"
+            borderWidth="1px"
+            borderStyle="dashed"
+            borderRadius="md"
+            backgroundColor="twitter.50"
+            _hover={{ boxShadow: 'md' }}
+          >
+            <Flex alignItems="center">
+              <Icon as={SiTwitter} w={6} h={6} color="twitter.400" marginRight={3} />
+              <Text fontSize={14} fontWeight="600">
+                6 tweets
+              </Text>
+            </Flex>
             <IconButton
               aria-label="Postar"
-              icon={<FiSend />}
+              icon={<AiOutlinePlus />}
               variant="ghost"
-              colorScheme="purple"
+              colorScheme="twitter"
             />
           </Flex>
-        )}
-      </Flex>
+
+          <Flex
+            alignItems="center"
+            justifyContent="space-between"
+            padding={2}
+            borderColor="pink.200"
+            borderWidth="1px"
+            borderStyle="dashed"
+            borderRadius="md"
+            backgroundColor="pink.50"
+            _hover={{ boxShadow: 'md' }}
+          >
+            <Flex alignItems="center">
+              <Icon as={SiInstagram} w={6} h={6} color="pink.400" marginRight={3} />
+              <Text fontSize={14} fontWeight="600">
+                4 posts
+              </Text>
+            </Flex>
+            <IconButton
+              aria-label="Postar"
+              icon={<AiOutlinePlus />}
+              variant="ghost"
+              colorScheme="pink"
+            />
+          </Flex>
+        </Stack>
+      )}
     </Box>
   )
 }

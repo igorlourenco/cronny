@@ -21,6 +21,7 @@ const formatUser = async (user: any) => {
 const authContext = createContext({
   user: null,
   signInWithGoogle: null,
+  connectToFacebook: null,
   signOut: null,
 })
 
@@ -55,6 +56,16 @@ function useProvideAuth() {
       })
   }
 
+  const connectToFacebook = () => {
+    return firebase
+      .auth()
+      .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+      .then(async (response) => {
+        console.log(response)
+        await router.push('/home')
+      })
+  }
+
   const signOut = async () => {
     return firebase
       .auth()
@@ -74,15 +85,14 @@ function useProvideAuth() {
   return {
     user,
     signInWithGoogle,
+    connectToFacebook,
     signOut,
   }
 }
 
 export function AuthProvider(props: AuthProviderProps) {
   const auth = useProvideAuth()
-  return (
-    <authContext.Provider value={auth}>{props.children}</authContext.Provider>
-  )
+  return <authContext.Provider value={auth}>{props.children}</authContext.Provider>
 }
 
 export const useAuth = () => {

@@ -2,12 +2,12 @@ import { Protected } from '../components/protected'
 import { useAuth } from '../contexts/auth'
 import fetcher from '../util/fetcher'
 import useSWR from 'swr'
-import { Heading, Spinner, Box } from '@chakra-ui/react'
+import { Heading, Spinner, Box, Button } from '@chakra-ui/react'
 import { FirstProjectBanner } from '../components/projects/first-project-banner'
 import { ProjectsBoard } from '../components/projects/projects-board'
 
 const Home = () => {
-  const { user } = useAuth()
+  const { user, connectToFacebook } = useAuth()
   const { data, error } = useSWR(user ? ['/api/projects', user.token] : null, fetcher)
 
   if (error) {
@@ -21,7 +21,10 @@ const Home = () => {
     <Protected>
       <Box display="flex" width="full" spacing={8} alignItems="center" justifyContent="center">
         {data && data.projects.length > 0 ? (
-          <ProjectsBoard projects={data.projects} />
+          <>
+            <Button onClick={connectToFacebook}>Connect to Facebook</Button>
+            <ProjectsBoard projects={data.projects} />
+          </>
         ) : (
           <FirstProjectBanner />
         )}
