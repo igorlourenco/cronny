@@ -47,9 +47,14 @@ function useProvideAuth() {
   }
 
   const signInWithGoogle = () => {
+    const facebookProvider = new firebase.auth.GoogleAuthProvider()
+    facebookProvider.addScope('public_profile')
+    facebookProvider.addScope('instagram_basic')
+    facebookProvider.addScope('pages_show_list')
+
     return firebase
       .auth()
-      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      .signInWithPopup(facebookProvider)
       .then(async (response) => {
         await handleUser(response.user)
         await router.push('/home')
